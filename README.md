@@ -24,7 +24,7 @@
 - Mongo DB
 - Node JS
 - Python
-
+- [Trello](https://trello.com/b/MFw3sZjK/thrive) 
 ---
 
 ### **_Getting Started_**
