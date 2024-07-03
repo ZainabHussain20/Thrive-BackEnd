@@ -37,6 +37,7 @@
 ##### ER Diagram and Trello 
 - [Trello](https://trello.com/b/MFw3sZjK/thrive)
 - [ERD](https://lucid.app/lucidchart/aeb9434c-7100-43b3-9607-ef0949dafb24/edit?viewport_loc=-1355%2C-2265%2C2399%2C898%2CHWEp-vi-RSFO&invitationId=inv_d4437256-9e4a-4d3a-8dac-34507b411647)
+- [wireFrame](https://www.canva.com/design/DAGJ5GPWuDY/r5YW6m7RyxFyzM-Y8Xae9g/edit?utm_content=DAGJ5GPWuDY&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 ##### Final Product
 
@@ -44,7 +45,9 @@
 
 ### **_Future Updates_**
 
-- [ ] Add more Admins for another institute
+- [ ] Adding other institutes and programs for each institute
+- [ ] Add owner userType, And make him add his own institutes and programs
+- [ ] Creating free educational courses
 
 ---
 
