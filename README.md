@@ -2,8 +2,7 @@
 
 ## Date: 07/03/2024
 
-### By: Zainab Al-Talaq | Zainab Husain | Hawraa Al-Attar | Maria Sayed Kadhim
-
+### By:
 #### Zinab Al-Talaq [GitHub](https://github.com/zainabaltalaq) | [LinkedIn](http://www.linkedin.com/in/zainabaltalaq)
 #### Zainab Husain [GitHub](https://github.com/ZainabHussain20) | [LinkedIn](https://www.linkedin.com/in/zainab-hussain-350643310/)
 #### Maria Sayed Kadhim [GitHub](https://github.com/) | [LinkedIn](http://www.linkedin.com/in/maria-kadhim)
