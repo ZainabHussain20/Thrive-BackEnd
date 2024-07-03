@@ -42,7 +42,7 @@
 
 ##### ER Diagram
 
-![ERD](https://ibb.co/m4X3mzh)
+![ERD](https://www9.0zz0.com/2024/07/03/12/308577979.png)
 
 ##### Final Product
 
