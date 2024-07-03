@@ -38,7 +38,8 @@
 ##### Wireframe
 
 ##### ER Diagram
-![ERD](https://www9.0zz0.com/2024/07/03/12/497142083.jpg)
+![erd](https://www9.0zz0.com/2024/07/03/12/497142083.jpg)
+
 
 ##### Final Product
 
