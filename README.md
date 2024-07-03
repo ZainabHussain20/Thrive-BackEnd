@@ -4,10 +4,10 @@
 
 ### By: Zainab Al-Talaq | Zainab Husain | Hawraa Al-Attar | Maria Sayed Kadhim
 
-#### [GitHub](https://github.com/zainabaltalaq) | [LinkedIn](http://www.linkedin.com/in/zainabaltalaq)
-#### [GitHub](https://github.com/ZainabHussain20) | [LinkedIn](https://www.linkedin.com/in/zainab-hussain-350643310/)
-#### [GitHub](https://github.com/) | [LinkedIn](http://www.linkedin.com/in/)
-#### [GitHub](https://github.com/Hawraalattar) | [LinkedIn](https://www.linkedin.com/in/hawraalattar)
+#### Zinab Al-Talaq [GitHub](https://github.com/zainabaltalaq) | [LinkedIn](http://www.linkedin.com/in/zainabaltalaq)
+#### Zainab Husain [GitHub](https://github.com/ZainabHussain20) | [LinkedIn](https://www.linkedin.com/in/zainab-hussain-350643310/)
+#### Maria Sayed Kadhim [GitHub](https://github.com/) | [LinkedIn](http://www.linkedin.com/in/maria-kadhim)
+#### Hawraa Al-Attar [GitHub](https://github.com/Hawraalattar) | [LinkedIn](https://www.linkedin.com/in/hawraalattar)
 
 ---
 
@@ -42,17 +42,15 @@
 
 ##### ER Diagram
 
-![ER]()
+![ERD](https://ibb.co/m4X3mzh)
 
 ##### Final Product
-
-![Page]()
 
 ---
 
 ### **_Future Updates_**
 
-- [ ] Add more categories and features.
+- [ ] Add more Admins for another institute
 
 ---
 
