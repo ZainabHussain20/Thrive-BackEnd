@@ -34,8 +34,6 @@
 
 ### **_Screenshots_**
 
-##### Wireframe
-
 ##### ER Diagram and Trello 
 - [Trello](https://trello.com/b/MFw3sZjK/thrive)
 - [ERD](https://lucid.app/lucidchart/aeb9434c-7100-43b3-9607-ef0949dafb24/edit?viewport_loc=-1355%2C-2265%2C2399%2C898%2CHWEp-vi-RSFO&invitationId=inv_d4437256-9e4a-4d3a-8dac-34507b411647)
