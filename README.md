@@ -5,7 +5,7 @@
 ### By:
 #### Zinab Al-Talaq [GitHub](https://github.com/zainabaltalaq) | [LinkedIn](http://www.linkedin.com/in/zainabaltalaq)
 #### Zainab Husain [GitHub](https://github.com/ZainabHussain20) | [LinkedIn](https://www.linkedin.com/in/zainab-hussain-350643310/)
-#### Maria Sayed Kadhim [GitHub](https://github.com/) | [LinkedIn](http://www.linkedin.com/in/maria-kadhim)
+#### Maria Sayed Kadhim [GitHub](https://github.com/MariiaaKadhim) | [LinkedIn](http://www.linkedin.com/in/maria-kadhim)
 #### Hawraa Al-Attar [GitHub](https://github.com/Hawraalattar) | [LinkedIn](https://www.linkedin.com/in/hawraalattar)
 
 ---
