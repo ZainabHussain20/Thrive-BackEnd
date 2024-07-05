@@ -72,9 +72,28 @@ const deleteProgram = async (req, res) => {
   }
 } //localhost:3001/programs/delete/programId
 
+const updateProgram = async (req, res) => {
+  try {
+    const programId = req.params.programId
+    const program = await Program.findByIdAndUpdate(programId, req.body, {
+      new: true,
+      runValidators: true,
+    })
+
+    if (!program) {
+      return res.status(404).send({ error: "Program not found" })
+    }
+    res.status(200).send(program)
+  } catch (e) {
+    console.error(e)
+    res.status(500).send({ error: "Internal Server Error" })
+  }
+}
+
 module.exports = {
   addProgram,
   getPrograms,
   getProgramsDetail,
   deleteProgram,
+  updateProgram,
 }
