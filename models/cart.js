@@ -4,7 +4,6 @@ const cartSchema = new Schema(
   {
     program: { type: Schema.Types.ObjectId, ref: "Program", required: true },
     totalPrice: Number,
-    // user: { type: Schema.Types.ObjectId, ref: "User", required: true },
   },
   {
     timestamps: true,
