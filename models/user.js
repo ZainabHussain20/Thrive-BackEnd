@@ -10,6 +10,8 @@ const userSchema = new Schema(
     email: String,
     password: { type: String, required: true },
     gender: { type: String, required: true },
+    type: String,
+    passwordDigest: { type: String, required: true },
     reviews: [
       {
         type: Schema.Types.ObjectId,
