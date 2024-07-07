@@ -140,6 +140,16 @@ const addReview = async (req, res) => {
   }
 }
 
+const deleteReview = async (req, res) => {
+  const reviewId = req.params.reviewId
+  const review = await Review.findById(reviewId)
+  if (!review) {
+    return res.status(404).send("Review not found")
+  }
+  const deleted = await Review.findByIdAndDelete(reviewId)
+  res.status(201).send(deleted)
+}
+
 module.exports = {
   addProgram,
   getPrograms,
@@ -148,4 +158,5 @@ module.exports = {
   updateProgram,
   review,
   addReview,
+  deleteReview,
 }
