@@ -6,12 +6,7 @@ const PORT = process.env.PORT || 3001
 require("./config/database")
 
 // const usersRouter = require("./routes/AuthRouter")
-const authroutes = require("./routes/AuthRouter")
-
-// const path = require("path")
-// const { register, login } = require("./controllers/User")
-// const userRoutes = require("./routes/User")
-
+const authRouter = require("./routes/AuthRouter")
 const programsRouter = require("./routes/programs")
 
 const app = express()
@@ -22,8 +17,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use("/programs", programsRouter)
-app.use("/register", authroutes)
-app.use("/login", authroutes)
+app.use("/auth", authRouter)
 
 app.listen(PORT, () => {
   console.log(`Running Express server on Port ${PORT} . . .`)

@@ -20,6 +20,7 @@ const Register = async (req, res) => {
       return res.status(400).send("The username has already been registered!")
     } else {
       const user = await User.create({
+        userName,
         firstName,
         lastName,
         birthDate,
