@@ -1,17 +1,14 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
-const reviewSchema = new Schema(
+
+const cartSchema = new Schema(
   {
-    content: { type: String, required: true },
-    rating: { type: String, required: true },
-    user: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-    },
+    program: [{ type: Schema.Types.ObjectId, ref: "Program" }],
+    totalPrice: Number,
   },
   {
     timestamps: true,
   }
 )
 
-module.exports = mongoose.model("Review", reviewSchema)
+module.exports = mongoose.model("Cart", cartSchema)
