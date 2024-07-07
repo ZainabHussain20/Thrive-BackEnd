@@ -10,6 +10,7 @@ const userSchema = new Schema(
     email: String,
     passwordDigest: { type: String, required: true },
     gender: { type: String, required: true },
+    phoneNumber: Number,
     type: String,
     reviews: [
       {
