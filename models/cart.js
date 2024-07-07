@@ -1,8 +1,9 @@
 const mongoose = require("mongoose")
 const Schema = mongoose.Schema
+
 const cartSchema = new Schema(
   {
-    program: { type: Schema.Types.ObjectId, ref: "Program", required: true },
+    program: [{ type: Schema.Types.ObjectId, ref: "Program" }],
     totalPrice: Number,
   },
   {
@@ -10,4 +11,4 @@ const cartSchema = new Schema(
   }
 )
 
-module.exports = mongoose.model("cart", cartSchema)
+module.exports = mongoose.model("Cart", cartSchema)
