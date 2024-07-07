@@ -8,10 +8,9 @@ const userSchema = new Schema(
     birthDate: Date,
     cpr: { type: String, required: true },
     email: String,
-    password: { type: String, required: true },
+    passwordDigest: { type: String, required: true },
     gender: { type: String, required: true },
     type: String,
-    passwordDigest: { type: String, required: true },
     reviews: [
       {
         type: Schema.Types.ObjectId,
@@ -19,7 +18,6 @@ const userSchema = new Schema(
       },
     ],
     userList: [{ type: Schema.Types.ObjectId, ref: "Program" }],
-    type: String,
     cart: { type: Schema.Types.ObjectId, ref: "Cart" },
   },
   {
