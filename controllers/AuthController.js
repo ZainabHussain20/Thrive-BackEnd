@@ -1,4 +1,5 @@
 const User = require("../models/user")
+const Cart = require("../models/cart")
 const middleware = require("../middleware/index")
 
 const Register = async (req, res) => {
@@ -19,6 +20,7 @@ const Register = async (req, res) => {
     if (existingUser) {
       return res.status(400).send("The username has already been registered!")
     } else {
+      const cart = await Cart.create({ program: [], totalPrice: 0 })
       const user = await User.create({
         userName,
         firstName,
@@ -29,6 +31,7 @@ const Register = async (req, res) => {
         gender,
         type,
         passwordDigest,
+        cart: cart._id,
       })
       res.send(user)
     }
