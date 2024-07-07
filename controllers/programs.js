@@ -116,7 +116,7 @@ const review = async (req, res) => {
 const addReview = async (req, res) => {
   const { review: reviewText, reviewRating } = req.body
   const userId = req.params.userId
-  const placeId = req.params.placeId
+  const programId = req.params.programId
 
   try {
     const review = new Review({
@@ -126,12 +126,12 @@ const addReview = async (req, res) => {
     })
     const createdReview = await review.save()
 
-    const place = await Place.findById(placeId)
-    if (!place) {
-      return res.status(404).send({ message: "Place not found" })
+    const program = await Program.findById(programId)
+    if (!program) {
+      return res.status(404).send({ message: "Program not available" })
     }
-    place.review.push(createdReview._id)
-    await place.save()
+    program.review.push(createdReview._id)
+    await program.save()
 
     res.status(201).send(createdReview)
   } catch (e) {
