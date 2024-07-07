@@ -5,8 +5,8 @@ require("dotenv").config()
 const PORT = process.env.PORT || 3001
 require("./config/database")
 
-// const usersRouter = require("./routes/AuthRouter")
-const authRouter = require("./routes/AuthRouter")
+const usersRouter = require("./routes/AuthRouter")
+// const authRouter = require("./routes/AuthRouter")
 const programsRouter = require("./routes/programs")
 
 const app = express()
@@ -17,7 +17,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 
 app.use("/programs", programsRouter)
-app.use("/auth", authRouter)
+app.use("/auth", usersRouter)
 
 app.listen(PORT, () => {
   console.log(`Running Express server on Port ${PORT} . . .`)

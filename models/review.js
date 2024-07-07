@@ -2,6 +2,11 @@ const mongoose = require("mongoose")
 const Schema = mongoose.Schema
 const reviewSchema = new Schema(
   {
+    program: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Program",
+      required: true,
+    },
     content: { type: String, required: true },
     rating: { type: String, required: true },
     user: {
