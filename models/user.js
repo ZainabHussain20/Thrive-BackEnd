@@ -19,6 +19,7 @@ const userSchema = new Schema(
     ],
     userList: [{ type: Schema.Types.ObjectId, ref: "Program" }],
     cart: { type: Schema.Types.ObjectId, ref: "Cart" },
+    userprogram: [{ type: Schema.Types.ObjectId, ref: "Program" }],
   },
   {
     timestamps: true,
