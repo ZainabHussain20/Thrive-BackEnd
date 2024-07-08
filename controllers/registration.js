@@ -12,6 +12,8 @@ const addToProgram = async (req, res) => {
       user: userId,
       state: "pending",
     })
+    const user = await User.findById(userId).populate("userprogram")
+    user.userprogram.push(registration)
     res.status(200).json(registration)
   } catch (e) {
     console.error(e)
@@ -96,20 +98,25 @@ const getRegistration = async (req, res) => {
 
 const acceptRegistration = async (req, res) => {
   const registrationId = req.params.registrationId
-  // const { userId } = req.body
+
   try {
     const registration = await Registration.findById(registrationId)
-    // const user = await User.findById(userId)
-    // if (!user || user.type !== "Admin") {
-    //   return res.status(403).json({ error: "Unauthorized" })
-    // }
     registration.state = req.body.state
-    await registration.save()
     if (registration.state === "accept") {
-      const user = await User.findById(userId).populate("cart")
-      user.cart.program.push(programId)
+      const user = await User.findById(req.body.user)
+      if (!user) {
+        return res.status(404).json({ error: "User not found" })
+      }
+      const cart = await Cart.findByIdAndUpdate(
+        user.cart,
+        {
+          $push: { program: req.body.program },
+        },
+        { new: true }
+      )
+      console.log({ cart })
     }
-    await user.cart.save()
+    await registration.save()
     res.json({ message: "Registration state updated successfully" })
   } catch (error) {
     console.error("Error updating", error)
@@ -117,7 +124,6 @@ const acceptRegistration = async (req, res) => {
 } //localhost:3001/registrations/:registrationId
 
 module.exports = {
-  addToCart,
   showCart,
   deleteFromTheCart,
   getRegistration,
