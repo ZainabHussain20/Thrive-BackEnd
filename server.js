@@ -6,6 +6,7 @@ const dotenv = require("dotenv")
 const PORT = process.env.PORT || 3001
 require("./config/database")
 
+
 const authRouter = require("./routes/AuthRouter")
 const programsRouter = require("./routes/programs")
 const registrationRouter = require("./routes/registration")
@@ -23,8 +24,13 @@ app.use(express.urlencoded({ extended: false }))
 app.use("/programs", programsRouter)
 app.use("/auth", authRouter)
 app.use("/registration", registrationRouter)
+
+
+app.use('/chat', chatRouter)
+
 app.use("/profile", profileRouter)
-app.use("/api", chatRouter)
+
+
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Thrive backend!")
