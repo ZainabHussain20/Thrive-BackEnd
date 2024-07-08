@@ -7,7 +7,7 @@ const PORT = process.env.PORT || 3001
 require("./config/database")
 
 const usersRouter = require("./routes/AuthRouter")
-// const authRouter = require("./routes/AuthRouter")
+const authRouter = require("./routes/AuthRouter")
 const programsRouter = require("./routes/programs")
 const registrationRouter = require("./routes/registration")
 const chatRouter = require("./routes/chat"); 
@@ -24,7 +24,7 @@ app.use("/programs", programsRouter)
 app.use("/auth", authRouter)
 app.use("/registration", registrationRouter)
 
-app.use("/api", chatRouter);
+app.use('/chat', chatRouter)
 
 app.get("/", (req, res) => {
   res.send("Welcome to the Thrive backend!");
