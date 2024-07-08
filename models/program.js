@@ -34,7 +34,14 @@ const programSchema = new Schema(
     block: String,
     bulding: String,
     line: String,
+    reviews: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Review",
+      },
+    ],
   },
+
   {
     timestamps: true,
   }
