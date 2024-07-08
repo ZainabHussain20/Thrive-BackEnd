@@ -13,6 +13,7 @@ const Register = async (req, res) => {
       email,
       password,
       gender,
+      phoneNumber,
       type,
     } = req.body
     let passwordDigest = await middleware.hashPassword(password)
@@ -29,6 +30,7 @@ const Register = async (req, res) => {
         cpr,
         email,
         gender,
+        phoneNumber,
         type,
         passwordDigest,
         cart: cart._id,
@@ -72,7 +74,7 @@ const UpdatePassword = async (req, res) => {
   try {
     const { userName, newPassword } = req.body
 
-    let user = await User.findOne({ username })
+    let user = await User.findOne({ userName })
 
     if (!user) {
       return res.status(404).send({ status: "Error", msg: "User not found" })
