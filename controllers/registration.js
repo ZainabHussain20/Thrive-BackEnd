@@ -7,19 +7,28 @@ const addToProgram = async (req, res) => {
   try {
     const programId = req.params.programId
     const userId = req.params.userId
+
     const registration = await Registration.create({
       program: programId,
       user: userId,
       state: "pending",
     })
+
     const user = await User.findById(userId).populate("userprogram")
-    user.userprogram.push(registration)
+
+    // Pushing the registration into userprogram array
+    user.userprogram.push(registration._id)
+
+    // Saving the user document to persist changes
+    await user.save()
+
     res.status(200).json(registration)
   } catch (e) {
     console.error(e)
     res.status(500).send("Error adding to cart")
   }
-} //localhost:3001/registration/:userId/:programId
+}
+//localhost:3001/registration/:userId/:programId
 
 // const addToCart = async (req, res) => {
 //   try {
