@@ -8,7 +8,7 @@ router.get("/", programsCtrl.getPrograms)
 router.get("/:programId", programsCtrl.getProgramsDetail)
 router.delete("/delete/:programId", programsCtrl.deleteProgram)
 router.put("/update/:programId", programsCtrl.updateProgram)
-router.post("/:programId/reviews/:userId", programsCtrl.addReview)
+router.post("/reviews/:userId", programsCtrl.addReview)
 router.delete("/:programId/reviews/:reviewId", programsCtrl.deleteReview)
 
 module.exports = router

@@ -9,6 +9,7 @@ require("./config/database")
 const authRouter = require("./routes/AuthRouter")
 const programsRouter = require("./routes/programs")
 const registrationRouter = require("./routes/registration")
+const profileRouter = require("./routes/profiles")
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use("/programs", programsRouter)
 app.use("/auth", authRouter)
 app.use("/registration", registrationRouter)
+app.use("/profile", profileRouter)
 
 app.listen(PORT, () => {
   console.log(`Running Express server on Port ${PORT} . . .`)

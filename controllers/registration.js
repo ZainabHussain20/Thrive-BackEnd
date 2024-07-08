@@ -3,7 +3,7 @@ const Registration = require("../models/registration")
 const Cart = require("../models/cart")
 const Program = require("../models/program")
 
-const addToCart = async (req, res) => {
+const addToProgram = async (req, res) => {
   try {
     const programId = req.params.programId
     const userId = req.params.userId
@@ -12,16 +12,32 @@ const addToCart = async (req, res) => {
       user: userId,
       state: "pending",
     })
-    const user = await User.findById(userId).populate("cart")
-    user.cart.program.push(programId)
-    await user.cart.save()
-
     res.status(200).json(registration)
   } catch (e) {
     console.error(e)
     res.status(500).send("Error adding to cart")
   }
 } //localhost:3001/registration/:userId/:programId
+
+// const addToCart = async (req, res) => {
+//   try {
+//     const programId = req.params.programId
+//     const userId = req.params.userId
+//     const registration = await Registration.create({
+//       program: programId,
+//       user: userId,
+//       state: "pending",
+//     })
+//     const user = await User.findById(userId).populate("cart")
+//     user.cart.program.push(programId)
+//     await user.cart.save()
+
+//     res.status(200).json(registration)
+//   } catch (e) {
+//     console.error(e)
+//     res.status(500).send("Error adding to cart")
+//   }
+// } //localhost:3001/registration/:userId/:programId
 
 const showCart = async (req, res) => {
   try {
@@ -89,6 +105,11 @@ const acceptRegistration = async (req, res) => {
     // }
     registration.state = req.body.state
     await registration.save()
+    if (registration.state === "accept") {
+      const user = await User.findById(userId).populate("cart")
+      user.cart.program.push(programId)
+    }
+    await user.cart.save()
     res.json({ message: "Registration state updated successfully" })
   } catch (error) {
     console.error("Error updating", error)
@@ -101,4 +122,5 @@ module.exports = {
   deleteFromTheCart,
   getRegistration,
   acceptRegistration,
+  addToProgram,
 }
