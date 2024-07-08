@@ -1,4 +1,5 @@
 const Program = require("../models/program")
+const Review = require("../models//review")
 
 const addProgram = async (req, res) => {
   try {
@@ -90,10 +91,47 @@ const updateProgram = async (req, res) => {
   }
 }
 
+const addReview = async (req, res) => {
+  const { content, rating } = req.body
+  const userId = req.params.userId
+  const programId = req.params.programId
+
+  try {
+    const review = new Review({
+      content,
+      rating,
+      user: userId,
+    })
+    const createdReview = await review.save()
+
+    const program = await Program.findById(programId)
+    program.reviews.push(createdReview._id)
+    await program.save()
+    res.status(201).send(createdReview)
+  } catch (e) {
+    console.error(e)
+    res.status(500).send({ message: "Internal Server Error" })
+  }
+}
+
+const deleteReview = async (req, res) => {
+  const reviewId = req.params.reviewId
+  const deleted = await Review.findByIdAndDelete(reviewId)
+  res.status(201).send(deleted)
+}
+
+const showReview = async (req, res) => {
+  const review = await Review.find({})
+  res.status(200).json(review)
+}
+
 module.exports = {
   addProgram,
   getPrograms,
   getProgramsDetail,
   deleteProgram,
   updateProgram,
+  addReview,
+  deleteReview,
+  showReview,
 }

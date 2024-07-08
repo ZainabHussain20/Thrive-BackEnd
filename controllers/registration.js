@@ -2,7 +2,6 @@ const User = require("../models/user")
 const Registration = require("../models/registration")
 const Cart = require("../models/cart")
 const Program = require("../models/program")
-const middleware = require("../middleware/index")
 
 const addToCart = async (req, res) => {
   try {
