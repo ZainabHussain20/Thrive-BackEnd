@@ -105,6 +105,19 @@ const getRegistration = async (req, res) => {
   }
 } //localhost:3001/registrations/:userId
 
+// const getPendingRegistrations = async (req, res) => {
+//   try {
+//     const pendingRegistrations = await Registration.find({ state: 'pending' }).populate('program user');
+//     res.status(200).json(pendingRegistrations);
+//   } catch (e) {
+//     console.error(e);
+//     res.status(500).send("Error retrieving pending registrations");
+//   }
+// }
+
+
+
+
 const acceptRegistration = async (req, res) => {
   const registrationId = req.params.registrationId
 
