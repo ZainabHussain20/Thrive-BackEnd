@@ -1,37 +1,39 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
-const programsCtrl = require('../controllers/programs')
-const middleware = require('../middleware')
+const programsCtrl = require("../controllers/programs")
+const middleware = require("../middleware")
 
-router.get('/reviews', programsCtrl.showReview)
+router.get("/reviews", programsCtrl.showReview)
 router.post(
-  '/addProgram',
+  "/addProgram",
   middleware.stripToken,
   middleware.verifyToken,
   programsCtrl.addProgram
 )
-router.get('/', programsCtrl.getPrograms)
-router.get('/:programId', programsCtrl.getProgramsDetail)
+router.get("/", programsCtrl.getPrograms)
+router.get("/:programId", programsCtrl.getProgramsDetail)
 router.delete(
-  '/delete/:programId',
+  "/delete/:programId",
   middleware.stripToken,
   middleware.verifyToken,
   programsCtrl.deleteProgram
 )
 router.put(
-  '/update/:programId',
+  "/update/:programId",
   middleware.stripToken,
   middleware.verifyToken,
   programsCtrl.updateProgram
 )
 router.post(
-  '/reviews/:userId',
+  "/reviews/:userId",
   middleware.stripToken,
   middleware.verifyToken,
   programsCtrl.addReview
 )
+router.get("/:userId/userprograms", programsCtrl.userprogram)
+
 router.delete(
-  '/:programId/reviews/:reviewId',
+  "/:programId/reviews/:reviewId",
   middleware.stripToken,
   middleware.verifyToken,
   programsCtrl.deleteReview

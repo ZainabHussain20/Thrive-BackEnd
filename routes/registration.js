@@ -1,52 +1,53 @@
-const express = require('express')
+const express = require("express")
 const router = express.Router()
-const registrationCtrl = require('../controllers/registration')
-const middleware = require('../middleware')
+const registrationCtrl = require("../controllers/registration")
+const middleware = require("../middleware")
 
 router.get(
-  '/allRegistration',
+  "/allRegistration",
   middleware.stripToken,
   middleware.verifyToken,
   registrationCtrl.getAllRegistration
 )
 router.get(
-  '/:registrationId/show',
+  "/:registrationId/show",
   middleware.stripToken,
   middleware.verifyToken,
   registrationCtrl.getOneRegistration
 )
 router.get(
-  '/:userId',
+  "/:userId",
   middleware.stripToken,
   middleware.verifyToken,
   registrationCtrl.getRegistration
 )
 router.post(
-  '/receipt',
+  "/receipt",
   middleware.stripToken,
   middleware.verifyToken,
   registrationCtrl.confirmPayment
 )
 router.put(
-  '/:registrationId',
+  "/:registrationId",
   middleware.stripToken,
   middleware.verifyToken,
+
   registrationCtrl.acceptRegistration
 )
 router.post(
-  '/:userId/:programId',
+  "/:userId/:programId",
   middleware.stripToken,
   middleware.verifyToken,
   registrationCtrl.addToProgram
 )
 router.get(
-  '/:userId/cart',
+  "/:userId/cart",
   middleware.stripToken,
   middleware.verifyToken,
   registrationCtrl.showCart
 )
 router.delete(
-  '/:userId/cart/:programId',
+  "/:userId/cart/:programId",
   middleware.stripToken,
   middleware.verifyToken,
   registrationCtrl.deleteFromTheCart
