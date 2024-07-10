@@ -1,5 +1,7 @@
-const Program = require('../models/program')
-const Review = require('../models/review')
+const Program = require("../models/program")
+const Review = require("../models/review")
+const User = require("../models/user")
+
 
 const addProgram = async (req, res) => {
   try {
@@ -120,6 +122,19 @@ const showReview = async (req, res) => {
   res.status(200).json(reviews)
 } // localhost:3001/programs/reviews
 
+const userprogram = async (req, res) => {
+  const userId = req.params.userId
+
+  try {
+    const user = await User.findById(userId).populate("userprogram")
+    const program = user.userprogram
+    res.status(200).json(program)
+  } catch (err) {
+    console.error("Error fetching user program:", err)
+    res.status(500).json({ error: "Internal server error" })
+  }
+}
+
 module.exports = {
   addProgram,
   getPrograms,
@@ -128,5 +143,7 @@ module.exports = {
   updateProgram,
   addReview,
   deleteReview,
+  showReview,
+  userprogram,
   showReview
 }
