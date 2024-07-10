@@ -89,24 +89,23 @@ const deleteFromTheCart = async (req, res) => {
 
 const confirmPayment = async (req, res) => {
   try {
-    const user = await User.findById(req.body.userId).populate('cart')
-    const cart = user.cart
-
-    const cartPrograms = await Promise.all(
-      cart.programs.map(async (programId) => {
-        const program = await Program.findById(programId)
-        return program
-      })
-    )
+    const user = await User.findById(res.locals.payload.id).populate({
+      path: 'cart',
+      populate: { path: 'program' }
+    })
+    const cartPrograms = user.cart.program
 
     let totalPrice = 0
-    for (const program of cartPrograms) {
+    for (const program of user.cart.program) {
       totalPrice += program.price
     }
 
     // Clear the cart
-    user.cart = await Cart.create({ programs: [], totalPrice: 0 })
-    await user.save()
+    await Cart.findByIdAndUpdate(user.cart._id, {
+      $set: { program: [], totalPrice: 0 }
+    })
+    // user.cart = await Cart.create({ program: [], totalPrice: 0 })
+    // await user.save()
 
     res.status(200).json({
       message: 'Cart cleared successfully',
