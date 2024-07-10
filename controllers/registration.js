@@ -141,11 +141,10 @@ const acceptRegistration = async (req, res) => {
         },
         { new: true }
       )
-      console.log({ cart })
       const username = await User.findById(req.body.user).populate(
         "userprogram"
       )
-      username.userprogram.push({ program: req.body.program })
+      username.userprogram.push(req.body.program)
       await user.save()
     }
     await Registration.findByIdAndDelete(registrationId)
