@@ -27,12 +27,11 @@ const programSchema = new Schema(
       },
     ],
     description: String,
-    limit: Number,
     gender: String,
     price: Number,
     location: String,
     block: String,
-    bulding: String,
+    building: String,
     img: String,
 
     reviews: [

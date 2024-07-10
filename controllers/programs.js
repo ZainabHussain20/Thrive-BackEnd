@@ -11,13 +11,12 @@ const addProgram = async (req, res) => {
       time,
       period,
       description,
-      limit,
       gender,
       price,
       location,
       block,
       building,
-      line,
+      img,
     } = req.body
 
     const createdProgram = await Program.create({
@@ -27,13 +26,12 @@ const addProgram = async (req, res) => {
       time,
       period,
       description,
-      limit,
       gender,
       price,
       location,
       block,
       building,
-      line,
+      img,
     })
 
     await createdProgram.save()
