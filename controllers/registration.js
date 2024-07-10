@@ -7,28 +7,21 @@ const addToProgram = async (req, res) => {
   try {
     const programId = req.params.programId
     const userId = req.params.userId
-
     const registration = await Registration.create({
       program: programId,
       user: userId,
       state: "pending",
     })
-
-    const user = await User.findById(userId).populate("userprogram")
-
-    // Pushing the registration into userprogram array
-    user.userprogram.push(registration._id)
-
-    // Saving the user document to persist changes
-    await user.save()
+    // const user = await User.findById(userId).populate("userprogram")
+    // user.userprogram.push(registration._id)
+    // await user.save()
 
     res.status(200).json(registration)
   } catch (e) {
     console.error(e)
     res.status(500).send("Error adding to cart")
   }
-}
-//localhost:3001/registration/:userId/:programId
+} //localhost:3001/registration/:userId/:programId
 
 // const addToCart = async (req, res) => {
 //   try {
@@ -57,8 +50,8 @@ const showCart = async (req, res) => {
     const cart = user.cart
 
     let totalPrice = 0
-    for (const programP of cart.program) {
-      const program = await Program.findById(programP)
+    for (const programId of cart.program) {
+      const program = await Program.findById(programId)
       if (program) {
         totalPrice += program.price
       }
@@ -70,7 +63,7 @@ const showCart = async (req, res) => {
     console.error("Error fetching cart:", error)
     res.status(500).json({ message: "Error fetching cart" })
   }
-} //localhost:3001/registration/:userId/:programId
+}
 
 const deleteFromTheCart = async (req, res) => {
   try {
@@ -103,14 +96,39 @@ const getRegistration = async (req, res) => {
     console.error(e)
     res.status(500).send("Error retrieving registrations")
   }
-} //localhost:3001/registrations/:userId
+}
+//localhost:3001/registrations/:userId
+const getOneRegistration = async (req, res) => {
+  const registrationId = req.params.registrationId
+  try {
+    const registration = await Registration.findById(registrationId)
+    if (!registration) {
+      return res.status(404).send("Registration not found")
+    }
+    res.status(200).json(registration)
+  } catch (e) {
+    console.error(e)
+    res.status(500).send("Error retrieving registration")
+  }
+}
+
+const getAllRegistration = async (req, res) => {
+  try {
+    const registrations = await Registration.find({})
+    res.status(200).json(registrations)
+  } catch (error) {
+    console.error("Error retrieving registrations:", error)
+    res.status(500).send("Error retrieving registrations")
+  }
+}
 
 const acceptRegistration = async (req, res) => {
   const registrationId = req.params.registrationId
-
   try {
     const registration = await Registration.findById(registrationId)
     registration.state = req.body.state
+    await registration.save()
+
     if (registration.state === "accept") {
       const user = await User.findById(req.body.user)
       if (!user) {
@@ -124,13 +142,19 @@ const acceptRegistration = async (req, res) => {
         { new: true }
       )
       console.log({ cart })
+      const username = await User.findById(req.body.user).populate(
+        "userprogram"
+      )
+      username.userprogram.push({ program: req.body.program })
+      await user.save()
     }
-    await registration.save()
+    await Registration.findByIdAndDelete(registrationId)
+
     res.json({ message: "Registration state updated successfully" })
   } catch (error) {
     console.error("Error updating", error)
   }
-} //localhost:3001/registrations/:registrationId
+} // localhost:3001/registration/:registrationId
 
 module.exports = {
   showCart,
@@ -138,4 +162,6 @@ module.exports = {
   getRegistration,
   acceptRegistration,
   addToProgram,
+  getAllRegistration,
+  getOneRegistration,
 }

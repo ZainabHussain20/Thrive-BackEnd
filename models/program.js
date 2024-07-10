@@ -33,7 +33,7 @@ const programSchema = new Schema(
     location: String,
     block: String,
     bulding: String,
-    line: String,
+    img: String,
 
     reviews: [
       {
@@ -41,7 +41,6 @@ const programSchema = new Schema(
         ref: "Review",
       },
     ],
-
   },
 
   {
