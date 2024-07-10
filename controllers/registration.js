@@ -161,7 +161,13 @@ const getRegistration = async (req, res) => {
   try {
     const registrations = await Registration.find({ user: userId })
       .populate('user', 'firstName lastName')
-      .populate('program', 'name');
+      .populate('program', 'name'); // Ensure 'program' refers to the correct field in your Registration schema
+    
+    // Extract program names for verification
+    const programNames = registrations.map(registration => registration.program.name)
+    
+    // Log program names to console for verification
+    console.log('Program Names:', programNames)
     
     res.status(200).json(registrations);
   } catch (e) {
@@ -169,6 +175,7 @@ const getRegistration = async (req, res) => {
     res.status(500).send('Error retrieving registrations')
   }
 }
+
 
 //localhost:3001/registrations/:userId
 const getOneRegistration = async (req, res) => {
