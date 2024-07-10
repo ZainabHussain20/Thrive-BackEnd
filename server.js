@@ -25,7 +25,6 @@ app.use("/auth", authRouter)
 app.use("/registration", registrationRouter)
 app.use("/profile", profileRouter)
 app.use("/api", chatRouter)
-
 app.get("/", (req, res) => {
   res.send("Welcome to the Thrive backend!")
 })

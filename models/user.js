@@ -18,7 +18,6 @@ const userSchema = new Schema(
         ref: "Review",
       },
     ],
-    userList: [{ type: Schema.Types.ObjectId, ref: "Program" }],
     cart: { type: Schema.Types.ObjectId, ref: "Cart" },
     userprogram: [{ type: Schema.Types.ObjectId, ref: "Program" }],
   },
