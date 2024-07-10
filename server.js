@@ -29,6 +29,7 @@ app.use("/registration", registrationRouter)
 app.use('/chat', chatRouter)
 
 app.use("/profile", profileRouter)
+app.use("/api", chatRouter)
 
 
 

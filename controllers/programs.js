@@ -116,8 +116,8 @@ const deleteReview = async (req, res) => {
 } // localhost:3001/programs/programId/reviews/reviewId/
 
 const showReview = async (req, res) => {
-  const review = await Review.find({})
-  res.status(200).json(review)
+  const reviews = await Review.find({}).populate("program").populate("user")
+  res.status(200).json(reviews)
 } // localhost:3001/programs/reviews
 
 module.exports = {
