@@ -101,10 +101,11 @@ const getRegistration = async (req, res) => {
 const getOneRegistration = async (req, res) => {
   const registrationId = req.params.registrationId
   try {
-    const registration = await Registration.findById(registrationId)
+    const registration = await Registration.findById(registrationId).populate({path:"user", populate:{path:"userprogram"}}).populate('program')
     if (!registration) {
       return res.status(404).send("Registration not found")
     }
+    console.log(registration);
     res.status(200).json(registration)
   } catch (e) {
     console.error(e)
@@ -136,38 +137,47 @@ const getAllRegistration = async (req, res) => {
 
 
 const acceptRegistration = async (req, res) => {
-  const registrationId = req.params.registrationId
+  const registrationId = req.params.registrationId;
   try {
-    const registration = await Registration.findById(registrationId)
-    registration.state = req.body.state
-    await registration.save()
+    const registration = await Registration.findById(registrationId);
+    if (!registration) {
+      return res.status(404).json({ error: "Registration not found" });
+    }
+
+    registration.state = req.body.state;
+    await registration.save();
 
     if (registration.state === "accept") {
-      const user = await User.findById(req.body.user)
+      const user = await User.findById(req.body.user);
       if (!user) {
-        return res.status(404).json({ error: "User not found" })
+        return res.status(404).json({ error: "User not found" });
       }
+
       const cart = await Cart.findByIdAndUpdate(
         user.cart,
         {
           $push: { program: req.body.program },
         },
         { new: true }
-      )
-      console.log({ cart })
-      const username = await User.findById(req.body.user).populate(
-        "userprogram"
-      )
-      username.userprogram.push({ program: req.body.program })
-      await user.save()
-    }
-    await Registration.findByIdAndDelete(registrationId)
+      );
 
-    res.json({ message: "Registration state updated successfully" })
+      if (!cart) {
+        return res.status(404).json({ error: "Cart not found" });
+      }
+
+      user.userprogram.push(req.body.program);
+      await user.save();
+    }
+
+    await Registration.findByIdAndDelete(registrationId);
+
+    res.json({ message: "Registration state updated successfully" });
   } catch (error) {
-    console.error("Error updating", error)
+    console.error("Error updating registration:", error);
+    res.status(500).json({ error: "Internal server error" });
   }
-} // localhost:3001/registration/:registrationId
+}
+ // localhost:3001/registration/:registrationId
 
 module.exports = {
   showCart,
