@@ -2,6 +2,7 @@ const Program = require("../models/program")
 const Review = require("../models/review")
 const User = require("../models/user")
 
+
 const addProgram = async (req, res) => {
   try {
     const {
@@ -17,7 +18,7 @@ const addProgram = async (req, res) => {
       location,
       block,
       building,
-      line,
+      line
     } = req.body
 
     const createdProgram = await Program.create({
@@ -33,7 +34,7 @@ const addProgram = async (req, res) => {
       location,
       block,
       building,
-      line,
+      line
     })
 
     await createdProgram.save()
@@ -49,7 +50,7 @@ const getPrograms = async (req, res) => {
     res.status(200).json(programs)
   } catch (e) {
     console.error(e)
-    res.status(500).send("Error retrieving programs")
+    res.status(500).send('Error retrieving programs')
   }
 } //localhost:3001/programs/
 
@@ -60,7 +61,7 @@ const getProgramsDetail = async (req, res) => {
     res.status(200).json(programs)
   } catch (e) {
     console.error(e)
-    res.status(500).send("Error retrieving programs")
+    res.status(500).send('Error retrieving programs')
   }
 } //localhost:3001/programs/programId
 const deleteProgram = async (req, res) => {
@@ -70,7 +71,7 @@ const deleteProgram = async (req, res) => {
     res.status(200).json(deleteProgram)
   } catch (e) {
     console.error(e)
-    res.status(500).send("Error retrieving programs")
+    res.status(500).send('Error retrieving programs')
   }
 } //localhost:3001/programs/delete/programId
 
@@ -79,16 +80,16 @@ const updateProgram = async (req, res) => {
     const programId = req.params.programId
     const program = await Program.findByIdAndUpdate(programId, req.body, {
       new: true,
-      runValidators: true,
+      runValidators: true
     })
 
     if (!program) {
-      return res.status(404).send({ error: "Program not found" })
+      return res.status(404).send({ error: 'Program not found' })
     }
     res.status(200).send(program)
   } catch (e) {
     console.error(e)
-    res.status(500).send({ error: "Internal Server Error" })
+    res.status(500).send({ error: 'Internal Server Error' })
   }
 }
 
@@ -100,13 +101,13 @@ const addReview = async (req, res) => {
     const review = new Review({
       content,
       rating,
-      user: userId,
+      user: userId
     })
     const createdReview = await review.save()
     res.status(201).send(createdReview)
   } catch (e) {
     console.error(e)
-    res.status(500).send({ message: "Internal Server Error" })
+    res.status(500).send({ message: 'Internal Server Error' })
   }
 } // localhost:3001/programs/programId/reviews/userId/
 
@@ -117,7 +118,7 @@ const deleteReview = async (req, res) => {
 } // localhost:3001/programs/programId/reviews/reviewId/
 
 const showReview = async (req, res) => {
-  const reviews = await Review.find({}).populate("program").populate("user")
+  const reviews = await Review.find({}).populate('user', 'userName')
   res.status(200).json(reviews)
 } // localhost:3001/programs/reviews
 
@@ -144,4 +145,5 @@ module.exports = {
   deleteReview,
   showReview,
   userprogram,
+  showReview
 }
