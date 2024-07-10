@@ -16,7 +16,45 @@ const addToProgram = async (req, res) => {
     // user.userprogram.push(registration._id)
     // await user.save()
 
-    res.status(200).json(registration)
+    // Retrieve user details
+    const user = await User.findById(userId, 'firstName lastName');
+    if (!user) {
+      return res.status(404).send("User not found");
+    }
+    console.log("User Details:", {
+      firstName: user.firstName,
+      lastName: user.lastName,
+    })
+
+
+    // Retrieve program details
+    const program = await Program.findById(programId, 'name start end description');
+    if (!program) {
+      return res.status(404).send("Program not found");
+    }
+
+    console.log("Program Details:", {
+      name: program.name,
+      start: program.start,
+      end: program.end,
+      description: program.description,
+    })
+
+    res.status(200).json({
+      
+      registration, 
+      user: {
+        firstName: user.firstName,
+        lastName: user.lastName,
+      },
+      program: {
+        name: program.name,
+        start: program.start,
+        end: program.end,
+        description: program.description,
+      }
+
+  })
   } catch (e) {
     console.error(e)
     res.status(500).send('Error adding to cart')
@@ -119,15 +157,19 @@ const confirmPayment = async (req, res) => {
 } //localhost:3001/registration/receipt
 
 const getRegistration = async (req, res) => {
-  const userId = req.params.userId
+  const userId = req.params.userId;
   try {
     const registrations = await Registration.find({ user: userId })
-    res.status(200).json(registrations)
+      .populate('user', 'firstName lastName')
+      .populate('program', 'name');
+    
+    res.status(200).json(registrations);
   } catch (e) {
     console.error(e)
     res.status(500).send('Error retrieving registrations')
   }
 }
+
 //localhost:3001/registrations/:userId
 const getOneRegistration = async (req, res) => {
   const registrationId = req.params.registrationId
@@ -147,6 +189,9 @@ const getOneRegistration = async (req, res) => {
 const getAllRegistration = async (req, res) => {
   try {
     const registrations = await Registration.find({})
+    .populate('user', 'firstName lastName') 
+    .populate('program', 'name') 
+
     res.status(200).json(registrations)
   } catch (error) {
     console.error('Error retrieving registrations:', error)
