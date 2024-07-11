@@ -27,7 +27,6 @@ const programSchema = new Schema(
       },
     ],
     description: String,
-    gender: String,
     price: Number,
     location: String,
     block: String,
