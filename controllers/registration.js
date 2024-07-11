@@ -5,20 +5,29 @@ const Program = require("../models/program")
 
 const addToProgram = async (req, res) => {
   try {
-    const programId = req.params.programId
-    const userId = req.params.userId
+    const programId = req.params.programId;
+    const userId = req.params.userId;
+
+    // Assuming you have mongoose models defined as User and Program
     const registration = await Registration.create({
       program: programId,
       user: userId,
       state: "pending",
-    })
+    });
 
-    res.status(200).json(registration)
+    // Populate user details (firstName and lastName)
+    await registration.populate('user', 'firstName lastName').execPopulate();
+
+    // Populate program details (name)
+    await registration.populate('program', 'name').execPopulate();
+
+    res.status(200).json(registration);
   } catch (e) {
-    console.error(e)
-    res.status(500).send("Error adding to cart")
+    console.error(e);
+    res.status(500).send("Error adding to cart");
   }
 }
+
 
 const showCart = async (req, res) => {
   try {
@@ -103,15 +112,23 @@ const confirmPayment = async (req, res) => {
 }
 
 const getRegistration = async (req, res) => {
-  const userId = req.params.userId
+  const userId = req.params.userId;
   try {
+    // Find registrations for the given user
     const registrations = await Registration.find({ user: userId })
-    res.status(200).json(registrations)
+      // Populate user details (firstName and lastName)
+      .populate('user', 'firstName lastName')
+      // Populate program details (name)
+      .populate('program', 'name')
+      .exec();
+
+    res.status(200).json(registrations);
   } catch (e) {
-    console.error(e)
-    res.status(500).send("Error retrieving registrations")
+    console.error(e);
+    res.status(500).send("Error retrieving registrations");
   }
 }
+
 
 const getOneRegistration = async (req, res) => {
   const registrationId = req.params.registrationId
