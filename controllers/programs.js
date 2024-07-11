@@ -115,9 +115,15 @@ const deleteReview = async (req, res) => {
 } // localhost:3001/programs/programId/reviews/reviewId/
 
 const showReview = async (req, res) => {
-  const reviews = await Review.find({}).populate("user", "userName")
-  res.status(200).json(reviews)
-} // localhost:3001/programs/reviews
+  try {
+    const reviews = await Review.find({})
+      .populate("user", "userName")
+      .populate("program", "name")
+    res.status(200).json(reviews)
+  } catch (error) {
+    res.status(500).json({ error: error.message })
+  }
+}
 
 const userprogram = async (req, res) => {
   const userId = req.params.userId

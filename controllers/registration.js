@@ -107,8 +107,8 @@ const getRegistration = async (req, res) => {
   try {
     const registrations = await Registration.find({ user: userId })
     res.status(200).json(registrations)
-  } catch (e) {
-    console.error(e)
+  } catch (error) {
+    console.error(error)
     res.status(500).send("Error retrieving registrations")
   }
 }
@@ -119,9 +119,6 @@ const getOneRegistration = async (req, res) => {
     const registration = await Registration.findById(registrationId)
       .populate({ path: "user", populate: { path: "userprogram" } })
       .populate("program")
-    if (!registration) {
-      return res.status(404).send("Registration not found")
-    }
     console.log(registration)
     res.status(200).json(registration)
   } catch (e) {
@@ -133,6 +130,8 @@ const getOneRegistration = async (req, res) => {
 const getAllRegistration = async (req, res) => {
   try {
     const registrations = await Registration.find({})
+      .populate({ path: "user", populate: { path: "firstName" } })
+      .populate("program")
     res.status(200).json(registrations)
   } catch (error) {
     console.error("Error retrieving registrations:", error)
@@ -179,7 +178,7 @@ const acceptRegistration = async (req, res) => {
     console.error("Error updating registration:", error)
     res.status(500).json({ error: "Internal server error" })
   }
-}
+} // localhost:3001/registration/:registrationId
 
 module.exports = {
   showCart,
