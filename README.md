@@ -52,6 +52,8 @@
 - [ ] Add owner userType, And make him add his own institutes and programs
 - [ ] Creating free educational courses
 
+**Live Site:** [Thrive](https://thrive-backend-c3s8.onrender.com)
+
 ---
 
 ### **_Credits_**
